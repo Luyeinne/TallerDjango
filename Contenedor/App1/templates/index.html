@@ -1,0 +1,27 @@
+{% load static %}
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Mis autores </title>
+    <link rel="stylesheet" href="{% static 'estilos.css' %}">
+</head>
+<body>
+    <div class="header">
+        <h1>Hola Comunidad</h1>
+        <br>
+        <p>Estos son nuestros autores</p>
+    </div>
+    <hr>
+    <ul>
+    {% for autor in autores %}
+    <li>
+        <a href="autor/{{autor.id}}">{{autor.nombre}}</a>
+    </li>
+
+    {% endfor %}
+    </ul>
+    <script src="{% static 'script.js' %}"></script>
+</body>
+</html>

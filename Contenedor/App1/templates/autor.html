@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Autores de Libros</title>
+        <link rel="stylesheet" href="{% static 'estilos_autor.css' %}">
+    </head>
+
+    <body>
+        <div class="header">
+            <h1>Bienvenido a mis autores</h1>
+            <a href="/" class="btn">Explorar !</a>
+        </div>
+        <div class="info">
+            <div class="autor_info">
+                <h2>Autor: {{ autor.id }} - {{ autor.nombre }}</h2>
+                <p>Fecha de nacimiento: {{ autor.fecha_nacimiento }}</p>
+                <p>Profesión: {{ autor.profesion }}</p>
+            </div>
+            {% if autor.imagen %}
+                <img src="{% static autor.imagen.url %}" alt="{{ autor.nombre }}">
+            {% else %}
+                <img src="{% static 'imagenes/sin_foto.png' %}" alt="{{ autor.nombre }}">
+            {% endif %}
+
+            <hr>
+
+            {% for libro in lista_libros %}
+                <h3>LIBRO {{ libro.nombre }}</h3>
+                {% if libro.imagen %}
+                    <img src="{% static libro.imagen.url %}" alt="{{ libro.nombre }}">
+                {%else%}
+                    <img src="{% static 'imagenes/sin_contenido.png' %}" alt="{{ libro.nombre }}">
+                {% endif %}
+
+                <h5>Citas:</h5>
+                {% for frases in libro.frasedb_set.all %}
+                    <li>{{ frases.cita }}</li>
+                {% endfor %}
+            {% endfor %}
+
+        </div>
+        <footer>
+            <p>Contacto: info@autoreslibros.com | Teléfono: 123-456-789</p>
+        </footer>
+    </body>
+</html>
